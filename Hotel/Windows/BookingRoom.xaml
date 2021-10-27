@@ -1,0 +1,77 @@
+﻿<Window x:Class="Hotel.Windows.BookingRoom"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hotel.Windows"
+        mc:Ignorable="d"
+        Closing="WindowClosing"
+        WindowStartupLocation="CenterScreen"
+        Title="Бонирование номера" Height="400" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="0.20*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" HorizontalAlignment="Stretch" TextAlignment="Center" Grid.ColumnSpan="2"
+                   Text="Бронирование номера" VerticalAlignment="Center" FontSize="23"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center"
+                    HorizontalAlignment="Center" Grid.ColumnSpan="2">
+            <TextBlock Text="Заезд" FontSize="20"/>
+            <GridSplitter Width="200" Background="White"/>
+            <TextBlock Text="Выезд" FontSize="20"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Grid.ColumnSpan="2">
+            <DatePicker x:Name="arrival" VerticalAlignment="Center" Width="150"
+                        SelectedDateChanged="SelectedDateChanged"/>
+            <TextBlock Text="-" FontSize="45" VerticalAlignment="Center" Width="100"
+                       TextAlignment="Center"/>
+            <DatePicker x:Name="departure" VerticalAlignment="Center" Width="150" 
+                        SelectedDateChanged="SelectedDateChanged"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center"
+                    HorizontalAlignment="Center" Grid.ColumnSpan="2">
+            <TextBlock Text="Взрослые" FontSize="20"/>
+            <GridSplitter Width="150" Background="White"/>
+            <TextBlock Text="Дети" FontSize="20" Width="60"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center"
+                                HorizontalAlignment="Center" Grid.ColumnSpan="2">
+
+            <Button x:Name="addAdult" Height="50" Width="50" FontSize="30" Content="+" Click="Add"/>
+            <TextBox x:Name="numberOfAdult" Text="1" FontSize="35" HorizontalContentAlignment="Center"
+                                 Height="50" VerticalAlignment="Bottom" Width="50" IsReadOnly="True"/>
+            <Button x:Name="subAdult" FontSize="30" Width="50" Height="50" Click="Sub" Content="-"/>
+            <GridSplitter Width="60" Background="White"/>
+
+            <Button x:Name="addChild" FontSize="30" Width="50" Height="50" Click="Add" Content="+"/>
+            <TextBox x:Name="numberOfChild" Text="0" FontSize="35" HorizontalContentAlignment="Center"
+                                 Width="50" Height="50" IsReadOnly="True"/>
+
+            <Button x:Name="subChild" FontSize="30" Width="50" Height="50" Click="Sub">
+                <TextBlock>-</TextBlock>
+            </Button>
+        </StackPanel>
+
+
+        <TextBlock x:Name="finalOrderCost" Grid.Row="5" Grid.Column="0" Text="К оплате: ($)" FontSize="25"
+                   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20 0 20 0" Width="240"/>
+        <Button x:Name="makeRoomOrder" Grid.Column="1" Grid.Row="5" Content="Забронировать"
+                VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"
+                Width="180" Height="40" Click="BuyRoom"/>
+
+    </Grid>
+</Window>

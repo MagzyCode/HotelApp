@@ -1,0 +1,184 @@
+﻿<Window x:Class="Hotel.Windows.ClientMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hotel.Windows"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowState="Maximized" Height="1079" Width="1919">
+    <Window.Resources>
+        <Style x:Key="ChangeOpacity">
+            <Style.Triggers>
+                <Trigger Property="Control.IsMouseOver" Value="True">
+                    <Setter Property="Control.Opacity" Value="1"/>
+                </Trigger>
+                <Trigger Property="Control.IsMouseOver" Value="False">
+                    <Setter Property="Control.Opacity" Value="0.35"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="sidebar">
+            <Setter Property="Button.MinHeight" Value="100"/>
+            <Setter Property="Button.MinWidth" Value="200"/>
+            <Setter Property="Button.Background" Value="#003580"/>
+            <Setter Property="Button.Foreground" Value="White"/>
+            <Setter Property="Button.FontFamily" Value="BlinkMacSystemFont"/>
+            <Setter Property="Button.FontSize" Value="17"/>
+            <Setter Property="Button.HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Button.Padding" Value="20 0 0 0"/>
+
+            <Style.Triggers>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                    <!--<Setter Property="Button.Background" Value="#0077CC"/>-->
+                    <Setter Property="Button.FontWeight" Value="Bold"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="colorDontChange">
+            <Style.Triggers>
+                <Trigger Property="Control.IsMouseOver" Value="True">
+                    <Setter Property="Control.Background" Value="DeepSkyBlue"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid MinWidth="1000" MinHeight="1000">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Picture/ClientWindow/fone.png"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.75*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.15*"/>
+            <ColumnDefinition Width="0.85*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <Grid x:Name="titleOfMainWindow" MinHeight="43" Background="White"
+                     Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0"
+              Style="{StaticResource ResourceKey = ChangeOpacity}" >
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.9*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="0.10*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="34,0,28,0"
+                       FontSize="19" FontWeight="Bold" Text="GRAND HOTEL TURKEY"/>
+            <GridSplitter Grid.Column="1" Width="3"/>
+            <Button FontSize="16" FontWeight="Bold" Background="White" BorderBrush="White"
+                    Grid.Column="2" Grid.Row="0" Style="{x:Null}" Content="Выход"
+                    Click="WindowClosing"/>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" Height="1190" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2">
+            <StackPanel MinWidth="300" Background="#003580">
+                <Button  Content="Личный кабинет" Style="{StaticResource sidebar}" Click="ShowClientMenu"/>
+                <Button x:Name="chooseService"  Content="Заказ услуг" Style="{StaticResource sidebar}" Click="ChooseService"/>
+                <Button x:Name="chooseRoom" Content="Заказ комнаты" Style="{StaticResource sidebar}" Click="ChooseRoom"/>
+                <Button  Content="Заказанные услуги" Style="{StaticResource sidebar}" Click="ShowSelectedOrders"/>
+                <Button  Content="Заказанные номера" Style="{StaticResource sidebar}" Click="ShowRoomOrders"/>
+
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel x:Name="cabinet" Background="White" HorizontalAlignment="Stretch" 
+                    Visibility="Visible" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"
+                    Margin="0 300 0 0" MinWidth="1000">
+            
+            <GridSplitter Height="120" />
+            <Image Source="/Picture/ClientWindow/man.jpg" MaxHeight="100"/>
+            <TextBlock x:Name="name" FontSize="30" FontWeight="Bold" TextAlignment="Center"/>
+            <GridSplitter Height="20"/>
+            <Border CornerRadius="25" BorderBrush="CadetBlue" BorderThickness="2"
+                    Background="DeepSkyBlue" HorizontalAlignment="Center" Width="400"
+                    Style="{StaticResource colorDontChange}">
+
+                <Button x:Name="changeSomeInfo" Content="Измените свой профиль" FontSize="24"
+                        Height="85" HorizontalAlignment="Center" Background="DeepSkyBlue" 
+                        BorderThickness="0" Click="ChangeSomeInfo" />
+
+            </Border>
+        </StackPanel>
+
+        <StackPanel x:Name="actualOrders" Visibility="Collapsed" Grid.Row="1" Grid.Column="1"
+                      MinWidth="1000" Background="White">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="titleOfOrders" FontSize="30" MinHeight="60" FontWeight="Bold" 
+                           Text="Актуальные услуги" Width="652"/>
+                <Button x:Name="cancelOrder" Content="Отменить заказ" FontSize="30"
+                        HorizontalAlignment="Right" Width="285"
+                        Visibility="Hidden" Click="DeleteOrder"/>
+            </StackPanel>
+            
+            
+            <DataGrid Name="clientsServices" IsReadOnly ="True" MinRowHeight="50" FontSize="16"
+                      AutoGenerateColumns="False" ColumnWidth="*" Visibility="Visible"
+                      Background="White" MouseLeftButtonUp="SelectOrder">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Номер заказа" Binding="{Binding ServiceOrderId}"/>
+                    <DataGridTextColumn Header="Услуга" Binding="{Binding Service.ServiceName}"/>
+                    <DataGridTextColumn Header="Дата оформления" Binding="{Binding TimeOfOrder}"/>
+                    <DataGridTextColumn Header="Время начала" Binding="{Binding StartTime}"/>
+                    <DataGridTextColumn Header="Время окончания" Binding="{Binding EndTime}"/>
+                    <DataGridTextColumn Header="Итоговая сумма" Binding="{Binding TotalPrice}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <DataGrid Name="clientsRoomOrder" IsReadOnly ="True" MinRowHeight="50" FontSize="16"
+                      AutoGenerateColumns="False" ColumnWidth="*" Visibility="Collapsed"
+                      Background="White" MouseLeftButtonUp="SelectOrder">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Номер заказа" Binding="{Binding RoomOrderNumber}"/>
+                    <DataGridTextColumn Header="Номер комнаты" Binding="{Binding RoomNumberInOrder}"/>
+                    <DataGridTextColumn Header="Дата оформления" Binding="{Binding TimeOfRoomOrder}"/>
+                    <DataGridTextColumn Header="Дата заселения" Binding="{Binding SettlementDate}"/>
+                    <DataGridTextColumn Header="Дата выселения" Binding="{Binding DepartureDate}"/>
+                    <DataGridTextColumn Header="Итоговая сумма" Binding="{Binding TotalPrice}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel> 
+        
+        <StackPanel x:Name="privateOrders" Visibility="Collapsed" Grid.Row="2" Grid.Column="1"
+                      MinWidth="1000" Background="White">
+
+            <TextBlock x:Name="titleOfPrivateOrder" FontSize="30" MinHeight="60" 
+                       FontWeight="Bold" Text="Закрытые заказы"/>
+
+            <DataGrid Name="clientsPrivateServices" IsReadOnly ="True" MinRowHeight="50" FontSize="16"
+                      AutoGenerateColumns="False" ColumnWidth="*" Visibility="Collapsed" Background="White">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Номер заказа" Binding="{Binding ServiceOrderId}"/>
+                    <DataGridTextColumn Header="Услуга" Binding="{Binding Service.ServiceName}"/>
+                    <DataGridTextColumn Header="Дата оформления" Binding="{Binding TimeOfOrder}"/>
+                    <DataGridTextColumn Header="Время начала" Binding="{Binding StartTime}"/>
+                    <DataGridTextColumn Header="Время окончания" Binding="{Binding EndTime}"/>
+                    <DataGridTextColumn Header="Итоговая сумма" Binding="{Binding TotalPrice}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <DataGrid Name="clientsPrivateRoomOrder" IsReadOnly ="True" MinRowHeight="50" FontSize="16"
+                      AutoGenerateColumns="False" ColumnWidth="*" Visibility="Collapsed"
+                      Background="White">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Номер заказа" Binding="{Binding RoomOrderNumber}"/>
+                    <DataGridTextColumn Header="Номер комнаты" Binding="{Binding RoomNumberInOrder}"/>
+                    <DataGridTextColumn Header="Дата оформления" Binding="{Binding TimeOfRoomOrder}"/>
+                    <DataGridTextColumn Header="Дата заселения" Binding="{Binding SettlementDate}"/>
+                    <DataGridTextColumn Header="Дата выселения" Binding="{Binding DepartureDate}"/>
+                    <DataGridTextColumn Header="Итоговая сумма" Binding="{Binding TotalPrice}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </StackPanel> 
+    </Grid>
+
+</Window>

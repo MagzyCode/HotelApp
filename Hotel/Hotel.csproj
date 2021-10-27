@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FA7AE9BD-F1E0-49A2-9FDA-9B82D208D60C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Hotel</RootNamespace>
+    <AssemblyName>Hotel</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=18.1460.0.52, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.18.1.0.52\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfChart.WPF, Version=18.1460.0.52, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfChart.WPF.18.1.0.52\lib\net46\Syncfusion.SfChart.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Classes\RoomOrderHelper.cs" />
+    <Compile Include="Classes\StatisticEarning.cs" />
+    <Compile Include="Content\Controller.cs" />
+    <Compile Include="Essence\RoomOrder.cs" />
+    <Compile Include="Essence\Room.cs" />
+    <Compile Include="Essence\RoomType.cs" />
+    <Compile Include="Essence\Service.cs" />
+    <Compile Include="Essence\ServiceOrder.cs" />
+    <Compile Include="ExceptionСlasses\CanMakeServiceOrderException.cs" />
+    <Compile Include="ExceptionСlasses\IsCorrectChooseException.cs" />
+    <Compile Include="Migrations\202004301729283_InitialCreate.cs" />
+    <Compile Include="Migrations\202004301729283_InitialCreate.designer.cs">
+      <DependentUpon>202004301729283_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004302051166_NoNotify.cs" />
+    <Compile Include="Migrations\202004302051166_NoNotify.designer.cs">
+      <DependentUpon>202004302051166_NoNotify.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005010937548_AddTotalCost.cs" />
+    <Compile Include="Migrations\202005010937548_AddTotalCost.designer.cs">
+      <DependentUpon>202005010937548_AddTotalCost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005010944239_ChangeSome.cs" />
+    <Compile Include="Migrations\202005010944239_ChangeSome.designer.cs">
+      <DependentUpon>202005010944239_ChangeSome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005011001441_ChangeSomething.cs" />
+    <Compile Include="Migrations\202005011001441_ChangeSomething.designer.cs">
+      <DependentUpon>202005011001441_ChangeSomething.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005011307426_TitleName.cs" />
+    <Compile Include="Migrations\202005011307426_TitleName.designer.cs">
+      <DependentUpon>202005011307426_TitleName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005021142129_ASD.cs" />
+    <Compile Include="Migrations\202005021142129_ASD.designer.cs">
+      <DependentUpon>202005021142129_ASD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005021150495_ASDВ.cs" />
+    <Compile Include="Migrations\202005021150495_ASDВ.designer.cs">
+      <DependentUpon>202005021150495_ASDВ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005041035589_ChangeStringToInt.cs" />
+    <Compile Include="Migrations\202005041035589_ChangeStringToInt.designer.cs">
+      <DependentUpon>202005041035589_ChangeStringToInt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005050959409_ASS.cs" />
+    <Compile Include="Migrations\202005050959409_ASS.designer.cs">
+      <DependentUpon>202005050959409_ASS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005071040220_AddTimeOfOrder.cs" />
+    <Compile Include="Migrations\202005071040220_AddTimeOfOrder.designer.cs">
+      <DependentUpon>202005071040220_AddTimeOfOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005082033538_dfghjkl.cs" />
+    <Compile Include="Migrations\202005082033538_dfghjkl.designer.cs">
+      <DependentUpon>202005082033538_dfghjkl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005102025582_dfyguhijokl.cs" />
+    <Compile Include="Migrations\202005102025582_dfyguhijokl.designer.cs">
+      <DependentUpon>202005102025582_dfyguhijokl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Windows\AdminWindow.xaml.cs">
+      <DependentUpon>AdminWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\BookingRoom.xaml.cs">
+      <DependentUpon>BookingRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ClientEditWindow.xaml.cs">
+      <DependentUpon>ClientEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ClientMenu.xaml.cs">
+      <DependentUpon>ClientMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EmployeeRegistration.xaml.cs">
+      <DependentUpon>EmployeeRegistration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EmployeeWindow.xaml.cs">
+      <DependentUpon>EmployeeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\NewRoomWindow.xaml.cs">
+      <DependentUpon>NewRoomWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\OrderСonfirmation.xaml.cs">
+      <DependentUpon>OrderСonfirmation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\OwnerWindow.xaml.cs">
+      <DependentUpon>OwnerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\OwnerChangeEmployeeWindow.xaml.cs">
+      <DependentUpon>OwnerChangeEmployeeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Registration.xaml.cs">
+      <DependentUpon>Registration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ServiceWindow.xaml.cs">
+      <DependentUpon>ServiceWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ShowRooms.xaml.cs">
+      <DependentUpon>ShowRooms.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Windows\AdminWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Authorization.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\BookingRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ClientEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ClientMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\EmployeeRegistration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\EmployeeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ConnectionSQL\MyDbContext.cs" />
+    <Compile Include="Essence\Client.cs" />
+    <Compile Include="Essence\Employee.cs" />
+    <Compile Include="Windows\Authorization.xaml.cs">
+      <DependentUpon>Authorization.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Windows\NewRoomWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\OrderСonfirmation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\OwnerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\OwnerChangeEmployeeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Registration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ServiceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ShowRooms.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Migrations\202004301729283_InitialCreate.resx">
+      <DependentUpon>202004301729283_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004302051166_NoNotify.resx">
+      <DependentUpon>202004302051166_NoNotify.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005010937548_AddTotalCost.resx">
+      <DependentUpon>202005010937548_AddTotalCost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005010944239_ChangeSome.resx">
+      <DependentUpon>202005010944239_ChangeSome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005011001441_ChangeSomething.resx">
+      <DependentUpon>202005011001441_ChangeSomething.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005011307426_TitleName.resx">
+      <DependentUpon>202005011307426_TitleName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005021142129_ASD.resx">
+      <DependentUpon>202005021142129_ASD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005021150495_ASDВ.resx">
+      <DependentUpon>202005021150495_ASDВ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005041035589_ChangeStringToInt.resx">
+      <DependentUpon>202005041035589_ChangeStringToInt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005050959409_ASS.resx">
+      <DependentUpon>202005050959409_ASS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005071040220_AddTimeOfOrder.resx">
+      <DependentUpon>202005071040220_AddTimeOfOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005082033538_dfghjkl.resx">
+      <DependentUpon>202005082033538_dfghjkl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005102025582_dfyguhijokl.resx">
+      <DependentUpon>202005102025582_dfyguhijokl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Picture\ShowRooms\classic_room.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Picture\MainWindow\coin.png" />
+    <Resource Include="Picture\MainWindow\first_window_room.png" />
+    <Resource Include="Picture\MainWindow\hostel.png" />
+    <Resource Include="Picture\MainWindow\hotel.png" />
+    <Resource Include="Picture\MainWindow\microchelick.png" />
+    <Resource Include="Picture\MainWindow\room_for_first_window.jpg" />
+    <Resource Include="Picture\MainWindow\sea_for_background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Picture\ShowRooms\decorationLine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Picture\ShowRooms\venzel_dlinniy_up.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Picture\ShowRooms\room_2.jpg" />
+    <Resource Include="Picture\ShowRooms\room_3jpg.jpg" />
+    <Resource Include="Picture\ShowRooms\room_4.jpg" />
+    <Resource Include="Picture\ShowRooms\room_5.jpg" />
+    <Resource Include="Picture\ShowRooms\room_6.jpg" />
+    <Resource Include="Picture\ShowRooms\room_7.jpg" />
+    <Resource Include="Picture\ShowRooms\room_8.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Picture\ServiceWindow\admin.jpg" />
+    <Resource Include="Picture\ServiceWindow\cook.png" />
+    <Resource Include="Picture\ServiceWindow\massage.png" />
+    <Resource Include="Picture\ServiceWindow\traveler.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 и x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Picture\ClientWindow\fone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Picture\ClientWindow\man.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Picture\MainWindow\our_service_1.png" />
+    <Resource Include="Picture\MainWindow\our_service_2.png" />
+    <Resource Include="Picture\MainWindow\our_service_4.png" />
+    <Resource Include="Picture\MainWindow\out_service_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="sea_for_background.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+</Project>

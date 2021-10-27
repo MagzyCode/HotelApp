@@ -1,0 +1,246 @@
+﻿<Window x:Class="Hotel.Windows.ServiceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hotel.Windows"
+        mc:Ignorable="d"
+        Closing="WindowClosing"
+        ResizeMode="NoResize"
+        Title="ServiceWindow" Height="2040" Width="2020" MinHeight="652" MinWidth="1050"  WindowState="Maximized">
+    <!--1266-->
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontFamily" Value="Palatino Linotype"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+
+        <Style TargetType="Image">
+            <Setter Property="MaxHeight" Value="400"/>
+        </Style>
+
+        <Style x:Key="serviceChoose">
+            <Setter Property="ComboBox.Height" Value="40"/>
+            <Setter Property="ComboBox.Width" Value="408"/>
+            <EventSetter Event="ComboBox.SelectionChanged" Handler="ShowCost"/>
+        </Style>
+
+        <Style x:Key="timeChoose">
+            <Setter Property="ComboBox.Width" Value="200"/>
+            <Setter Property="ComboBox.Height" Value="40"/>
+            <!--<EventSetter Event="ComboBox.SelectionChanged" Handler="ChooseTime"/>-->
+        </Style>
+
+        <Style x:Key="orders">
+            <Setter Property="Button.Height" Value="45"/>
+            <Setter Property="Button.Width" Value="290"/>
+            <Setter Property="Button.FontSize" Value="28"/>
+            <Setter Property="Button.Content" Value="Заказать"/>
+            <Setter Property="Button.FontStyle" Value="Italic"/>
+            <EventSetter Event="Button.Click" Handler="BuyService"/>
+        </Style>
+
+        <Style TargetType="DatePicker">
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="25"/>
+            <EventSetter Event="SelectedDateChanged" Handler="FindTimeForClient"/>
+        </Style>
+    </Window.Resources>
+
+    <ScrollViewer>
+        <Grid MaxHeight="2020" MinHeight="1266">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.1*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border BorderBrush="Black" BorderThickness="1" Grid.Row="0" Grid.Column="0">
+                <StackPanel x:Name="massage" >
+                    <Image Source="/Picture/ServiceWindow/massage.png"/>
+                    <TextBlock FontSize="40" Height="60" Text="Массаж"/>
+                    <Image Source="/Picture/ShowRooms/venzel_dlinniy_up.jpg" Height="71" Margin="0,0,0.4,0" />
+                    <TextBlock Height="100">
+                    Техник и видов массажа великое множество. 
+                    Наши познакомят вас со всевозможными секретами и приемами этого невероятного процесса.
+                    </TextBlock>
+                    <TextBlock Height="45">
+                    Выберите одну из возможных услуг:
+                    </TextBlock>
+                    <ComboBox x:Name="chooseMassage" Style="{StaticResource serviceChoose}">
+                        <TextBlock Text="Медицинский массаж"/>
+                        <TextBlock Text="Классический массаж"/>
+                        <TextBlock Text="Спа-массаж"/>
+                        <TextBlock Text="Массаж камнями"/>
+                    </ComboBox>
+
+                    <StackPanel x:Name="massageOrder" Visibility="Collapsed">
+                        <StackPanel x:Name="payMassage" Orientation="Horizontal" Visibility="Visible">
+                            <TextBlock x:Name="massageCost" Margin="20" MinWidth="350"
+                                       TextAlignment="Left" FontSize="30"/>
+                            <Button x:Name="orderMassage" Style="{StaticResource orders}"/>
+                        </StackPanel>
+                        <StackPanel x:Name="chooseMassageDate" Orientation="Horizontal" Visibility="Visible"
+                                VerticalAlignment="Center">
+                            <TextBlock Margin="20" MinWidth="350" TextAlignment="Left"
+                                       FontSize="30" Text="Выберите дату"/>
+                            <DatePicker x:Name="massageDate"/>
+
+                        </StackPanel>
+                        <StackPanel x:Name="chooseMassageTime" Orientation="Horizontal" Visibility="Hidden">
+                            <TextBlock Margin="20" MinWidth="350" TextAlignment="Left" FontSize="30"
+                                       Text="Выберите время"/>
+                            <!--<ComboBox x:Name="massageTime" Style="{StaticResource timeChoose}"/>-->
+                            <Button x:Name="addMassage" Height="40" Width="40" FontSize="30" Content="+"
+                                    Click="AddTime"/>
+                            <TextBlock x:Name="massageTime" Width="120" Height="40" Background="WhiteSmoke"
+                                       FontSize="30"/>
+                            <Button x:Name="subMassage" Height="40" Width="40" FontSize="30" Content="-" 
+                                    Click="SubTime"/>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                </StackPanel>
+            </Border>
+
+            <Border BorderBrush="Black" BorderThickness="1" Grid.Row="0" Grid.Column="2">
+                <StackPanel x:Name="travel" >
+                    <Image Source="/Picture/ServiceWindow/traveler.png"/>
+                    <TextBlock FontSize="40" Height="60" Text="Экскурсии"/>
+                    <Image Source="/Picture/ShowRooms/venzel_dlinniy_up.jpg" Height="71" Margin="0,0,0.4,0" />
+
+                    <TextBlock TextWrapping="Wrap" Height="100">
+                     В сопровождении квалифицированного гида Вы сможете посетить бывшую королевскую резиденцию,
+                     а также вживую увидеть выстуление в Гранд Опере.
+                    </TextBlock>
+                    <TextBlock Height="45">
+                    Выберите одну из возможных услуг:
+                    </TextBlock>
+                    <ComboBox x:Name="chooseTravel" Style="{StaticResource serviceChoose}">
+                        <TextBlock Text="Круиз на остров Кафка"/>
+                        <TextBlock Text="Экскурсия на горы Тахталын"/>
+                        <TextBlock Text="Посещение острова Лудоманов"/>
+                        <TextBlock Text="Экскурсия в пещеры"/>
+                    </ComboBox>
+                    <StackPanel x:Name="travelOrder" Visibility="Collapsed">
+                        <StackPanel x:Name="payTravel" Visibility="Visible" Orientation="Horizontal">
+                            <TextBlock x:Name="travelCost" TextAlignment="Left" Height="45"
+                                       Margin="20" Width="350"  FontSize="30"/>
+                            <Button x:Name="orderTravel" Style="{StaticResource orders}"/>
+                        </StackPanel>
+                        <StackPanel x:Name="chooseTravelDate" Orientation="Horizontal" Visibility="Visible">
+                            <TextBlock Margin="20" MinWidth="350" TextAlignment="Left" 
+                                       FontSize="30" Text="Выберите дату"/>
+                            <DatePicker x:Name="travelDate"/>
+                        </StackPanel>
+                        <StackPanel x:Name="chooseTravelTime" Orientation="Horizontal" Visibility="Hidden">
+                            <TextBlock Margin="20" MinWidth="350" TextAlignment="Left" FontSize="30" 
+                                       Text="Выберите время"/>
+                            <!--<ComboBox x:Name="travelTime" Style="{StaticResource timeChoose}"/>-->
+                            <Button x:Name="addTravel" Height="40" Width="40" FontSize="30" Content="+" Click="AddTime"/>
+                            <TextBlock x:Name="travelTime" Width="120" Height="40" Background="WhiteSmoke" FontSize="30"/>
+                            <Button x:Name="subTravel" Height="40" Width="40" FontSize="30" Content="-" Click="SubTime"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                </StackPanel>
+            </Border>
+
+            <Border BorderBrush="Black" BorderThickness="1" Grid.Row="2" Grid.Column="0">
+                <StackPanel x:Name="administration" Grid.Row="2" Grid.Column="0">
+                    <Image Source="/Picture/ServiceWindow/admin.jpg"/>
+                    <TextBlock FontSize="40" Height="60" Text="Дополнительные услуги"/>
+                    <Image Source="/Picture/ShowRooms/venzel_dlinniy_up.jpg" Height="71" Margin="0,0,0.4,0" />
+                    <TextBlock Height="100">
+                        Помимо стандартных услуг, Мы можем предоставить ряд дополнительных услуг
+                    </TextBlock>
+                    <TextBlock Height="45">
+                    Выберите одну из возможных услуг:
+                    </TextBlock>
+                    <ComboBox x:Name="chooseOther" Style="{StaticResource serviceChoose}">
+                        <TextBlock Text="Вызов такси"/>
+                        <TextBlock Text="Аренда ноутбука"/>
+                        <TextBlock Text="Предоставление сейфа"/>
+                        <TextBlock Text="Пополнение бара"/>
+                        <TextBlock Text="Химчистка"/>
+                        <TextBlock Text="Услуга переводчика"/>
+                    </ComboBox>
+                    <StackPanel  x:Name="otherOrder" Visibility="Collapsed">
+                        <StackPanel x:Name="payOther" Visibility="Visible" Orientation="Horizontal">
+                            <TextBlock x:Name="otherCost" FontSize="30" Margin="20" Width="350" TextAlignment="Left"/>
+                            <Button x:Name="orderOther" Style="{StaticResource orders}"/>
+                        </StackPanel>
+                        <StackPanel x:Name="chooseOtherDate" Orientation="Horizontal" Visibility="Visible">
+                            <TextBlock Margin="20" MinWidth="350" TextAlignment="Left" FontSize="30" 
+                                       Text="Выберите дату"/>
+                            <DatePicker x:Name="otherDate"/>
+                        </StackPanel>
+                        <StackPanel x:Name="chooseOtherTime" Orientation="Horizontal" Visibility="Hidden">
+                            <TextBlock Margin="20" MinWidth="350" TextAlignment="Left" FontSize="30" 
+                                       Text="Выберите время"/>
+                            <!--<ComboBox x:Name="otherTime" Style="{StaticResource timeChoose}"/>-->
+                            <Button x:Name="addOther" Height="40" Width="40" FontSize="30" Content="+" Click="AddTime"/>
+                            <TextBlock x:Name="otherTime"  Width="120" Height="40" Background="WhiteSmoke" FontSize="30"/>
+                            <Button x:Name="subOther" Height="40" Width="40" FontSize="30" Content="-" Click="SubTime"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                </StackPanel>
+            </Border>
+
+            <Border BorderBrush="Black" BorderThickness="1" Grid.Row="2" Grid.Column="2">
+                <StackPanel x:Name="cook" Grid.Row="2" Grid.Column="2">
+                    <Image Source="/Picture/ServiceWindow/cook.png" Height="387"/>
+                    <TextBlock FontSize="40" Height="60" Text="Кухня"/>
+                    <Image Source="/Picture/ShowRooms/venzel_dlinniy_up.jpg" Height="71" Margin="0,0,0.4,0" />
+                    <TextBlock Height="100">
+                        Наш ресторан обладает высоким уровнем комфортности за счёт
+                    высокого качества обслуживания посетителей и 
+                    разнообразием кулинарных, кондитерских изделий.
+                    </TextBlock>
+                    <TextBlock Height="45">
+                    Выберите одну из возможных услуг:
+                    </TextBlock>
+                    <ComboBox x:Name="chooseFood" Style="{StaticResource serviceChoose}">
+                        <TextBlock Text="Доставка еды в номер"/>
+                        <TextBlock Text="Ужин от шеф-повара"/>
+                        <TextBlock Text="Шоу молекулярной кухни"/>
+                    </ComboBox>
+
+                    <StackPanel x:Name="foodOrder" Visibility="Collapsed">
+                        <StackPanel x:Name="payFood" Orientation="Horizontal" Visibility="Visible">
+                            <TextBlock x:Name="foodCost" Margin="20" MinWidth="350" TextAlignment="Left" FontSize="30"/>
+                            <Button x:Name="orderFood" Style="{StaticResource orders}"/>
+                        </StackPanel>
+                        <StackPanel x:Name="chooseFoodDate" Orientation="Horizontal" Visibility="Visible">
+                            <TextBlock Margin="20" MinWidth="350" TextAlignment="Left" FontSize="30" Text="Выберите дату"/>
+                            <DatePicker x:Name="foodDate"/>
+                        </StackPanel>
+                        <StackPanel x:Name="chooseFoodTime" Orientation="Horizontal" Visibility="Hidden">
+                            <TextBlock Margin="20" MinWidth="350" TextAlignment="Left" FontSize="30" 
+                                       Text="Выберите время"/>
+                            <!--<ComboBox x:Name="foodTime" Style="{StaticResource timeChoose}"/>-->
+                            <Button x:Name="addFood" Height="40" Width="40" FontSize="30" Content="+" Click="AddTime"/>
+                            <TextBlock x:Name="foodTime"  Width="120" Height="40" Background="WhiteSmoke" FontSize="30"/>
+                            <Button x:Name="subFood" Height="40" Width="40" FontSize="30" Content="-" Click="SubTime"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+
+        </Grid>
+    </ScrollViewer>
+
+</Window>
